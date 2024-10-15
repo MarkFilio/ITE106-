@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class StudentGradeCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of students: ");
+        int numStudents = scanner.nextInt();
+
+        String[] studentNames = new String[numStudents];
+        double[] studentAverages = new double[numStudents];
+        char[] studentGrades = new char[numStudents];
+
+        for (int i = 0; i < numStudents; i++) {
+            System.out.println("Enter details for student " + (i + 1) + ":");
+            System.out.print("Name: ");
+            studentNames[i] = scanner.next();
+
+            System.out.print("Number of assignments: ");
+            int numAssignments = scanner.nextInt();
+            double[] scores = new double[numAssignments];
+
+            double total = 0;
+            for (int j = 0; j < numAssignments; j++) {
+                System.out.print("Score for assignment " + (j + 1) + ": ");
+                scores[j] = scanner.nextDouble();
+                total += scores[j];
+            }
+
+            double average = total / numAssignments;
+            studentAverages[i] = average;
+            studentGrades[i] = getLetterGrade(average);
+        }
+
+        System.out.println("\nStudent Grades: ");
+        for (int i = 0; i < numStudents; i++) {
+            System.out.println("Name: " + studentNames[i] + ", Average: " + studentAverages[i] + ", Grade: " + studentGrades[i]);
+        }
+
+        scanner.close();
+    }
+
+    private static char getLetterGrade(double average) {
+        if (average >= 90) {
+            return 'A';
+        } else if (average >= 85) {
+            return 'B';
+        } else if (average >= 80) {
+            return 'C';
+        } else if (average >= 75) {
+            return 'D';
+        } else {
+            return 'F';
+        }
+    }
+}
